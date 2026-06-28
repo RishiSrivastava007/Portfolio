@@ -137,4 +137,54 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.add('fade-in-element');
         entranceObserver.observe(el);
     });
+
+    // --- Web3Forms Form Submission Handler ---
+    const contactForm = document.getElementById('contact-form');
+    const formResult = document.getElementById('form-result');
+
+    if (contactForm && formResult) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            formResult.textContent = "Please wait...";
+            formResult.className = "form-result success";
+            formResult.style.display = "block";
+
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let jsonRes = await response.json();
+                if (response.status == 200) {
+                    formResult.className = "form-result success";
+                    formResult.textContent = "Message sent successfully! I will get back to you soon.";
+                    contactForm.reset();
+                } else {
+                    console.log(response);
+                    formResult.className = "form-result error";
+                    formResult.textContent = jsonRes.message || "Something went wrong. Please try again.";
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                formResult.className = "form-result error";
+                formResult.textContent = "Network error. Please check your connection and try again.";
+            })
+            .then(() => {
+                setTimeout(() => {
+                    formResult.style.display = "none";
+                }, 5000);
+            });
+        });
+    }
 });
+

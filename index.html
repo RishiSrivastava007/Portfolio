@@ -446,7 +446,9 @@
                 </div>
 
                 <div class="contact-form-panel">
-                    <form action="mailto:rishi.srivastava_cs23@gla.ac.in" method="post" enctype="text/plain" class="contact-form">
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="contact-form">
+                        <input type="hidden" name="access_key" value="af682fac-dad2-4799-8bb0-9df6c1a3564a">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Your Name</label>
@@ -466,6 +468,7 @@
                             <textarea id="message" name="message" rows="5" required placeholder="Hi Rishi, I'd like to discuss..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+                        <div id="form-result" class="form-result"></div>
                     </form>
                 </div>
             </div>

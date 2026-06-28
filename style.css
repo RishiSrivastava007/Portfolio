@@ -1162,3 +1162,28 @@ img {
     transform: translateY(0);
 }
 
+/* --- Form Submission Feedback --- */
+.form-result {
+    margin-top: 1.25rem;
+    padding: 0.85rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: none;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+.form-result.success {
+    display: block;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+}
+.form-result.error {
+    display: block;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+}
+
+
